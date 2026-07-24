@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c1a14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>天国拯救 II · 骰子</title>
+  <link rel="stylesheet" href="/css/game.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="brand">
+      <h1>天国拯救 II</h1>
+      <p>骰子对决 · 先入账达到目标者胜</p>
+    </header>
+
+    <section class="hud" aria-live="polite">
+      <div class="side" id="you-hud">
+        <span class="label">你</span>
+        <span class="value"><span id="you-score">0</span></span>
+      </div>
+      <div class="target">目标<br /><strong id="target">3000</strong></div>
+      <div class="side right" id="ai-hud">
+        <span class="label">对手</span>
+        <span class="value"><span id="ai-score">0</span></span>
+      </div>
+    </section>
+
+    <section class="stage">
+      <div class="seat">
+        <div class="seat-head">
+          <strong id="ai-name">对手</strong>
+          <span>本轮 <b id="ai-turn">0</b></span>
+        </div>
+        <div class="dice" id="ai-dice" aria-label="对手骰子"></div>
+      </div>
+
+      <div class="status">
+        <span id="message">点「掷骰子」开始</span>
+        <span class="sel">当前选择 <b id="selection">0</b></span>
+      </div>
+
+      <div class="seat">
+        <div class="seat-head">
+          <strong id="you-name">你</strong>
+          <span>本轮 <b id="you-turn">0</b></span>
+        </div>
+        <div class="dice" id="you-dice" aria-label="你的骰子"></div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button class="btn-primary" id="btn-roll" type="button">掷骰子</button>
+      <button class="btn-ghost" id="btn-continue" type="button" disabled>得分并继续</button>
+      <button class="btn-ghost" id="btn-pass" type="button" disabled>得分并结束</button>
+    </section>
+
+    <footer class="footer-links">
+      <button type="button" id="btn-rules">计分规则</button>
+      <button type="button" id="btn-reset">新游戏</button>
+    </footer>
+  </div>
+
+  <div class="sheet" id="rules-sheet" role="dialog" aria-modal="true">
+    <div class="sheet-card">
+      <h2>计分规则</h2>
+      <ul>
+        <li>1 = 100　5 = 50</li>
+        <li>三个 1 = 1000；三个 N(2–6) = N×100</li>
+        <li>每多一颗相同骰子，该组合分翻倍</li>
+        <li>顺子 1–5 = 500；2–6 = 750；1–6 = 1500</li>
+        <li>选中的每一颗都必须能计分</li>
+        <li>全部计分后可重掷六颗（热骰，本轮分仍未入账）</li>
+        <li>无计分组合则爆点，本轮清零</li>
+      </ul>
+      <button class="close" type="button" id="btn-close-rules">关闭</button>
+    </div>
+  </div>
+
+  <div class="overlay-win" id="win-overlay">
+    <div class="card">
+      <h2 id="win-title">游戏结束</h2>
+      <p id="win-text"></p>
+      <button type="button" id="btn-again">再来一局</button>
+    </div>
+  </div>
+
+  <script type="module" src="/js/ui.js"></script>
+</body>
+</html>
