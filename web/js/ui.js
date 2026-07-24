@@ -13,7 +13,6 @@ import {
   toggleDie,
 } from "./game.js";
 
-const FACES = { 1: "⚀", 2: "⚁", 3: "⚂", 4: "⚃", 5: "⚄", 6: "⚅" };
 const TARGET = 3000;
 const AI_STEP_MS = 700;
 
@@ -23,13 +22,24 @@ let aiTimer = 0;
 
 const $ = (id) => document.getElementById(id);
 
+function makeDieButton(face) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "die";
+  btn.dataset.face = String(face);
+  btn.setAttribute("aria-label", `${face} 点`);
+  for (let p = 0; p < 9; p++) {
+    const pip = document.createElement("span");
+    pip.className = "pip";
+    btn.appendChild(pip);
+  }
+  return btn;
+}
+
 function renderDice(container, interactive) {
   container.innerHTML = "";
   for (let i = 0; i < 6; i++) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "die";
-    btn.textContent = FACES[state.dice[i]];
+    const btn = makeDieButton(state.dice[i]);
     if (state.held[i]) btn.classList.add("held");
     if (state.selected[i]) btn.classList.add("selected");
 
